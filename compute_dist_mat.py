@@ -7,7 +7,7 @@ import numpy as np
 import tensorflow as tf
 import glove_utils
 import pickle 
-from keras.preprocessing.sequence import pad_sequences
+from keras_preprocessing.sequence import pad_sequences
 
 MAX_VOCAB_SIZE = 50000
 embedding_matrix = np.load(('aux_files/embeddings_counter_%d.npy' %(MAX_VOCAB_SIZE)))

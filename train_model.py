@@ -6,7 +6,7 @@ import os
 import data_utils
 import pickle
 
-from keras.preprocessing.sequence import pad_sequences
+from keras_preprocessing.sequence import pad_sequences
 
 import numpy as np
 import tensorflow as tf
@@ -18,6 +18,7 @@ IMDB_PATH = 'aclImdb'
 MAX_VOCAB_SIZE = 50000
 
 if __name__ == '__main__':
+    print('Start Training...')
     with open(('aux_files/dataset_%d.pkl' %MAX_VOCAB_SIZE), 'rb') as f:
         dataset = pickle.load(f)
     # TODO(malzantot): should we keep using the normal glove embeddings here ?
@@ -27,10 +28,12 @@ if __name__ == '__main__':
     train_y = np.array(dataset.train_y)
     test_x = pad_sequences(dataset.test_seqs2, maxlen=max_len, padding='post')
     test_y = np.array(dataset.test_y)
-    sess = tf.Session()
+    sess = tf.compat.v1.Session()
     batch_size = 64
     lstm_size = 128
     num_epochs = 20
+    print('Start Training...')
+
     with tf.variable_scope('imdb', reuse=False):
         model = models.SentimentModel(batch_size=batch_size,
                            lstm_size = lstm_size,
